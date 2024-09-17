@@ -18,3 +18,14 @@ export interface UserState {
   loading: boolean;
   errors: boolean;
 }
+
+export type filterUser<Type> = {
+  [Property in keyof Type]: string;
+};
+
+export type filters = {
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+};

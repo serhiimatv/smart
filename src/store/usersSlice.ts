@@ -6,7 +6,6 @@ import {
 import axios from "axios";
 import { type User } from "../models/user";
 import { type filtersKeysType, type UserState } from "../models/types";
-import { filterUser } from "./selectors";
 
 const createSliceWithThunks = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -27,7 +26,6 @@ const usersSlice = createSliceWithThunks({
     filtersSelector: (state) => state.filters,
     loadingSelector: (state) => state.loading,
     errorSelector: (state) => state.errors,
-    filteredUsersSelector: (state) => filterUser(state.users, state.filters),
   },
   reducers: (create) => ({
     fetchUsers: create.asyncThunk(
@@ -72,7 +70,6 @@ export const {
   filtersSelector,
   loadingSelector,
   errorSelector,
-  filteredUsersSelector,
 } = usersSlice.selectors;
 
 export default usersSlice.reducer;

@@ -23,7 +23,7 @@ const useTheme = () => {
     }
   }, [theme]);
 
-  return { theme, setTheme: useCallback(setTheme, [theme]) };
+  return { theme, setTheme: useCallback(setTheme, [theme, setTheme]) };
 };
 
 export default useTheme;

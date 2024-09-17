@@ -1,13 +1,12 @@
-import { FC } from "react";
 import SearchInput from "./SearchInput";
 import ThemeSwitcher from "./ThemeSwitcher";
 import TableHeadItem from "./TableHeadItem";
 import TableBodyRow from "./TableBodyRow";
 import { useAppSelector } from "../hooks/reduxHooks";
-import { filtersSelector } from "../store/usersReducers";
+import { filtersSelector } from "../store/usersSlice";
 import { filtersKeysType } from "../models/types";
 
-const Table: FC = () => {
+const Table = () => {
   const filters = useAppSelector(filtersSelector);
   return (
     <>

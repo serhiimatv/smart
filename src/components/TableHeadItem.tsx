@@ -1,16 +1,14 @@
-import { FC, memo, ReactNode } from "react";
+import { memo, ReactNode } from "react";
 
-interface IProps {
+type TableHeadItem = {
   children?: ReactNode;
-}
+};
 
-const TableHeadItem: FC<IProps> = ({ children }) => {
+const TableHeadItem = ({ children }: TableHeadItem) => {
   return (
-    <>
-      <th className="flex justify-center items-center cursor-pointer">
-        {children}
-      </th>
-    </>
+    <th className="flex justify-center items-center cursor-pointer">
+      {children}
+    </th>
   );
 };
 

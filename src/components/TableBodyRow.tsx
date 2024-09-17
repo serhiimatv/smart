@@ -1,22 +1,22 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import {
   errorSelector,
   fetchUsers,
-  filteredUsersSelector,
   loadingSelector,
-} from "../store/usersReducers";
+} from "../store/usersSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { filteredUserSelector } from "../store/complexSelectors";
 
-const TableBodyRow: FC = () => {
+const TableBodyRow = () => {
   const dispatch = useAppDispatch();
 
-  const filteredUsers = useAppSelector(filteredUsersSelector);
+  const filteredUsers = useAppSelector(filteredUserSelector);
   const loading = useAppSelector(loadingSelector);
   const error = useAppSelector(errorSelector);
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   if (error) {
     return (

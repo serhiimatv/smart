@@ -4,8 +4,8 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { type User } from "../models/user";
-import { type filtersKeysType, type UserState } from "../models/types";
+import { IUser } from "../models/user";
+import { FiltersKeysType, IUserSliceState } from "../models/userSliceTypes";
 
 const createSliceWithThunks = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
@@ -16,7 +16,7 @@ const initialState = {
   filters: { name: "", username: "", email: "", phone: "" },
   loading: false,
   errors: false,
-} satisfies UserState as UserState;
+} as IUserSliceState;
 
 const usersSlice = createSliceWithThunks({
   name: "user",
@@ -44,7 +44,7 @@ const usersSlice = createSliceWithThunks({
         rejected: (state) => {
           state.errors = true;
         },
-        fulfilled: (state, actions: PayloadAction<User[]>) => {
+        fulfilled: (state, actions: PayloadAction<IUser[]>) => {
           state.users = actions.payload;
         },
         settled: (state) => {
@@ -55,7 +55,7 @@ const usersSlice = createSliceWithThunks({
     inputFilter: create.reducer(
       (
         state,
-        actions: PayloadAction<{ filter: filtersKeysType; value: string }>
+        actions: PayloadAction<{ filter: FiltersKeysType; value: string }>
       ) => {
         state.filters[actions.payload.filter] = actions.payload.value;
       }

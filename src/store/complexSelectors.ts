@@ -1,15 +1,12 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { filters, filtersKeysType, filterUser } from "../models/types";
-import { type User } from "../models/user";
+import { FiltersType, FiltersKeysType } from "../models/userSliceTypes";
+import { IUser } from "../models/user";
 import { filtersSelector, usersSelector } from "./usersSlice";
 
-export const filterUsers = (
-  users: User[],
-  filter: filterUser<filters>
-): User[] => {
+export const filterUsers = (users: IUser[], filter: FiltersType): IUser[] => {
   return users.filter((user) => {
     return Object.entries(filter).every(([key, value]) => {
-      return user[key as filtersKeysType]
+      return user[key as FiltersKeysType]
         .toLocaleLowerCase()
         .includes(value.toLocaleLowerCase().trim());
     });

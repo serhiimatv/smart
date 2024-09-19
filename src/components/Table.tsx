@@ -4,7 +4,7 @@ import TableHeadItem from "./TableHeadItem";
 import TableBodyRow from "./TableBodyRow";
 import { useAppSelector } from "../hooks/reduxHooks";
 import { filtersSelector } from "../store/usersSlice";
-import { filtersKeysType } from "../models/types";
+import { FiltersKeysType } from "../models/userSliceTypes";
 
 const Table = () => {
   const filters = useAppSelector(filtersSelector);
@@ -30,7 +30,7 @@ const Table = () => {
             <tr className="grid grid-cols-4 px-4 h-16">
               {Object.keys(filters).map((key) => (
                 <td className="flex justify-center" key={key}>
-                  <SearchInput filter={key as filtersKeysType} />
+                  <SearchInput filter={key as FiltersKeysType} />
                 </td>
               ))}
             </tr>

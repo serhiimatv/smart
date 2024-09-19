@@ -1,25 +1,25 @@
-export interface User {
+export interface IUser {
   id: number;
   name: string;
   username: string;
   email: string;
-  address: Address;
+  address: IAddress;
   phone: string;
   website: string;
-  company: Company;
+  company: ICompany;
 }
-export interface Address {
+export interface IAddress {
   street: string;
   suite: string;
   city: string;
   zipcode: string;
-  geo: Geo;
+  geo: IGeo;
 }
-export interface Geo {
+export interface IGeo {
   lat: string;
   lng: string;
 }
-export interface Company {
+export interface ICompany {
   name: string;
   catchPhrase: string;
   bs: string;

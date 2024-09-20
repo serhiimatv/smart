@@ -4,6 +4,10 @@ import useTheme from "../hooks/useTheme";
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
+  const handleThemeChange = () => {
+    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  };
+
   return (
     <label className="inline-flex items-center cursor-pointer">
       <input
@@ -11,9 +15,8 @@ const ThemeSwitcher = () => {
         value=""
         className="sr-only peer"
         checked={theme === "dark"}
-        onChange={() => {
-          setTheme(theme === "dark" ? "light" : "dark");
-        }}
+        aria-label="Toggle theme"
+        onChange={handleThemeChange}
       />
       <div
         className="relative w-11 h-6 bg-gray-200 rounded-full peer bg-gray

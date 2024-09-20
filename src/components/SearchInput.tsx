@@ -19,7 +19,10 @@ const SearchInput = ({ filter }: SearchInputProps) => {
 
   return (
     <div className="flex items-center relative">
-      <SearchIcon />
+      <SearchIcon
+        styleSvg="absolute left-[10px]"
+        stylePath="stroke-grayBorder dark:stroke-white"
+      />
       <input
         type="text"
         className="border-grayBorder border-solid border-[1px] rounded-lg h-8 w-[218px] pl-[33px]

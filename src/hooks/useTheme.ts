@@ -1,29 +1,47 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-type theme = "dark" | "light";
+type ThemeType = "dark" | "light";
 
 const useTheme = () => {
-  const usedTheme = localStorage.getItem("theme");
+  const getInitialTheme = (): ThemeType => {
+    try {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        return savedTheme;
+      }
 
-  if (!usedTheme) {
-    localStorage.setItem("theme", "light");
-  }
+      localStorage.setItem("theme", "light");
 
-  const [theme, setTheme] = useState<"dark" | "light">(
-    localStorage.getItem("theme") as theme
-  );
+      return "light";
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
+
+      return "light";
+    }
+  };
+
+  const [theme, setTheme] = useState<ThemeType>(getInitialTheme);
 
   useEffect(() => {
-    if (theme === "dark") {
-      window.document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      window.document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+    try {
+      if (theme === "dark") {
+        window.document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        window.document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
     }
   }, [theme]);
 
-  return { theme, setTheme: useCallback(setTheme, [theme, setTheme]) };
+  const memoizedSetTheme = useCallback(setTheme, [setTheme]);
+
+  return useMemo(
+    () => ({ theme, setTheme: memoizedSetTheme }),
+    [theme, memoizedSetTheme]
+  );
 };
 
 export default useTheme;

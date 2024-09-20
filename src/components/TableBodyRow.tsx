@@ -6,6 +6,7 @@ import {
 } from "../store/usersSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { filteredUserSelector } from "../store/complexSelectors";
+import { IUser } from "../models/user";
 
 const TableBodyRow = () => {
   const dispatch = useAppDispatch();
@@ -44,7 +45,7 @@ const TableBodyRow = () => {
 
   return (
     <>
-      {filteredUsers.map((user) => (
+      {filteredUsers.map((user: IUser) => (
         <tr
           className="px-4 grid grid-cols-4 h-16 bg-lightViolet even:bg-white
                        dark:bg-semiDarkViolet even:dark:bg-violet"

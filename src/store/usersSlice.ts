@@ -7,6 +7,8 @@ import axios from "axios";
 import { IUser } from "../models/user";
 import { FiltersKeysType, IUserSliceState } from "../models/userSliceTypes";
 
+const USERS_API_URL = "https://jsonplaceholder.typicode.com/users";
+
 const createSliceWithThunks = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 });
@@ -22,17 +24,15 @@ const usersSlice = createSliceWithThunks({
   name: "user",
   initialState,
   selectors: {
-    usersSelector: (state) => state.users,
-    filtersSelector: (state) => state.filters,
-    loadingSelector: (state) => state.loading,
-    errorSelector: (state) => state.errors,
+    usersSelector: (state: IUserSliceState) => state.users,
+    filtersSelector: (state: IUserSliceState) => state.filters,
+    loadingSelector: (state: IUserSliceState) => state.loading,
+    errorSelector: (state: IUserSliceState) => state.errors,
   },
   reducers: (create) => ({
     fetchUsers: create.asyncThunk(
       async () => {
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
+        const response = await axios.get(USERS_API_URL);
 
         return response.data;
       },

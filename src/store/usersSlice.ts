@@ -5,7 +5,11 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import { IUser } from "../models/user";
-import { FiltersKeysType, IUserSliceState } from "../models/userSliceTypes";
+import {
+  FiltersKeysType,
+  IUserSliceState,
+  UserFiltersType,
+} from "../models/userSliceTypes";
 
 const USERS_API_URL = "https://jsonplaceholder.typicode.com/users";
 
@@ -24,10 +28,10 @@ const usersSlice = createSliceWithThunks({
   name: "user",
   initialState,
   selectors: {
-    usersSelector: (state: IUserSliceState) => state.users,
-    filtersSelector: (state: IUserSliceState) => state.filters,
-    loadingSelector: (state: IUserSliceState) => state.loading,
-    errorSelector: (state: IUserSliceState) => state.errors,
+    usersSelector: (state: IUserSliceState): IUser[] => state.users,
+    filtersSelector: (state: IUserSliceState): UserFiltersType => state.filters,
+    loadingSelector: (state: IUserSliceState): boolean => state.loading,
+    errorSelector: (state: IUserSliceState): boolean => state.errors,
   },
   reducers: (create) => ({
     fetchUsers: create.asyncThunk(
@@ -37,26 +41,29 @@ const usersSlice = createSliceWithThunks({
         return response.data;
       },
       {
-        pending: (state) => {
+        pending: (state: IUserSliceState): void => {
           state.loading = true;
           state.errors = false;
         },
-        rejected: (state) => {
+        rejected: (state: IUserSliceState): void => {
           state.errors = true;
         },
-        fulfilled: (state, actions: PayloadAction<IUser[]>) => {
+        fulfilled: (
+          state: IUserSliceState,
+          actions: PayloadAction<IUser[]>
+        ): void => {
           state.users = actions.payload;
         },
-        settled: (state) => {
+        settled: (state: IUserSliceState): void => {
           state.loading = false;
         },
       }
     ),
     inputFilter: create.reducer(
       (
-        state,
+        state: IUserSliceState,
         actions: PayloadAction<{ filter: FiltersKeysType; value: string }>
-      ) => {
+      ): void => {
         state.filters[actions.payload.filter] = actions.payload.value;
       }
     ),

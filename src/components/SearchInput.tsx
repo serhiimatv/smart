@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { filtersSelector, inputFilter } from "../store/usersSlice";
 import { FiltersKeysType } from "../models/userSliceTypes";
 import SearchIcon from "./icons/SearchIcon";
+import { AppDispatch } from "../store";
 
 type SearchInputProps = {
   filter: FiltersKeysType;
 };
 
 const SearchInput = ({ filter }: SearchInputProps) => {
-  const dispatch = useAppDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
 
   const filters = useAppSelector(filtersSelector);
 

@@ -1,6 +1,6 @@
 import { IUser } from "./user";
 
-export type FiltersType = {
+export type UserFiltersType = {
   name: string;
   username: string;
   email: string;
@@ -8,9 +8,9 @@ export type FiltersType = {
 };
 export interface IUserSliceState {
   users: IUser[];
-  filters: FiltersType;
+  filters: UserFiltersType;
   loading: boolean;
   errors: boolean;
 }
 
-export type FiltersKeysType = keyof FiltersType;
+export type FiltersKeysType = keyof UserFiltersType;

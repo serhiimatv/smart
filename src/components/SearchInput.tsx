@@ -5,9 +5,9 @@ import { FiltersKeysType } from "../models/userSliceTypes";
 import SearchIcon from "./icons/SearchIcon";
 import { AppDispatch } from "../store";
 
-type SearchInputProps = {
+interface SearchInputProps {
   filter: FiltersKeysType;
-};
+}
 
 const SearchInput = ({ filter }: SearchInputProps) => {
   const dispatch: AppDispatch = useAppDispatch();

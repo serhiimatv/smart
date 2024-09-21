@@ -1,7 +1,7 @@
-type SearchIconProps = {
+interface SearchIconProps {
   styleSvg?: string;
   stylePath?: string;
-};
+}
 
 const SearchIcon = ({ styleSvg = "", stylePath = "" }: SearchIconProps) => {
   return (

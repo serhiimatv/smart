@@ -1,8 +1,8 @@
 import { memo, ReactNode } from "react";
 
-type TableHeadItem = {
+interface TableHeadItem {
   children?: ReactNode;
-};
+}
 
 const TableHeadItem = ({ children }: TableHeadItem) => {
   return (
